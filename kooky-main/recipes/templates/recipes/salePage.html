@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'recipes/salePage.css' %}?{% now 'U' %}">
+  <script src="{% static 'recipes/js/salePage.js' %}"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<style>
+		
+
+	</style>
+
+
+</head>
+
+<body>
+	<p style="color: white ;">SALE</p>
+ <div id="clockdiv">
+  <div>
+    <span class="days" id="day"></span>
+    <div class="smalltext">Days</div>
+  </div>
+  <div>
+    <span class="hours" id="hour"></span>
+    <div class="smalltext">Hours</div>
+  </div>
+  <div>
+    <span class="minutes" id="minute"></span>
+    <div class="smalltext">Minutes</div>
+  </div>
+  <div>
+    <span class="seconds" id="second"></span>
+    <div class="smalltext">Seconds</div>
+  </div>
+</div> <br>
+
+<button id="payment-button">Pay Now</button>
+<div id="payment-form" style="display: none;">
+    <form  action="{% url 'payment' %}" method="post" >
+       
+        {% csrf_token %}
+
+        <label for="name"><h4>Name on Card</h4></label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="card_number"><h4>Card Number</h4></label>
+        <input type="text" id="card_number" name="card_number" required>
+
+        <label for="expiry_date"><h4>Expiry Date</h4></label>
+        <input type="text" id="expiry_date" name="expiry_date" required>
+
+        <label for="cvv"><h4>CVV</h4></label>
+        <input type="text" id="cvv" name="cvv" required>
+      
+        <input id="pay" type="submit" value="Pay">
+    </form>
+</div>
+
+ <br>
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var paymentButton = document.getElementById('payment-button');
+    var paymentForm = document.getElementById('payment-form');
+
+    paymentButton.addEventListener('click', function() {
+        paymentForm.style.display = 'none';
+        // Create a new window with the form content
+        var newWindow = window.open('', 'Payment Form', 'width=500,height=500');
+        newWindow.document.body.innerHTML = paymentForm.innerHTML;
+        newWindow.document.title = 'Payment Form';
+        var newStylesheet = newWindow.document.createElement('style');
+        newStylesheet.innerHTML = `
+        body {
+          background-color: #e2d3cd;
+        }
+        h4 {
+          color: white;
+        }
+        label {
+          display: block;
+          margin-bottom: 10px;
+          font-weight: bold;
+          color: #f61491;
+        }
+        input[type="text"],
+        textarea {
+          display: block;
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #f61491;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          font-size: 16px;
+        }
+        #pay {
+          background-color: #e2d3cd;
+          border: 2px solid white;
+          border-radius: 4px;
+          color: white;
+        }
+
+`;
+
+// Append the stylesheet to the head of the document
+newWindow.document.head.appendChild(newStylesheet);
+
+        // Submit the form using AJAX in the background
+        $(newWindow.document).find('form').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Redirect the user to the payment page after successful submission
+                    newWindow.close();
+                    window.location.href = 'http://127.0.0.1:8000/payment';
+                }
+            });
+        });
+
+        // Show the window
+        newWindow.focus();
+    });
+});
+
+
+  </script>
+  <!--
+document.addEventListener('DOMContentLoaded', function() {
+    var paymentButton = document.getElementById('payment-button');
+    var paymentForm = document.getElementById('payment-form');
+
+    paymentButton.addEventListener('click', function() {
+        // Hide the payment form on the main page
+        paymentForm.style.display = 'none';
+
+        // Create a new window with the form content
+        var newWindow = window.open('', 'Payment Form', 'width=500,height=500');
+        newWindow.document.body.innerHTML = paymentForm.innerHTML;
+        newWindow.document.title = 'Payment Form';
+
+        // Show the window
+        newWindow.focus();
+    });
+});
+
+var deadline = new Date("may 27, 2023 00:00:00").getTime();
+var x = setInterval(function() {
+var now = new Date().getTime();
+var t = deadline - now;
+var days = Math.floor(t / (1000 * 60 * 60 * 24)); /*since in milliseconds all time measuremenents are divided by 1000*/
+var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60));
+var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((t % (1000 * 60)) / 1000);
+document.getElementById("day").innerHTML =days ;
+document.getElementById("hour").innerHTML =hours;
+document.getElementById("minute").innerHTML = minutes; 
+document.getElementById("second").innerHTML =seconds; 
+}, 0); /*delay for 0 millisec*/
+
+
+function changeLocation(){
+this.window.location = "C:\\Users\\User\\OneDrive\\Desktop\\frontEnd\\Final\\Final\\form\\index.html";
+}
+</script>-->
+
+
+</body>
+</html>

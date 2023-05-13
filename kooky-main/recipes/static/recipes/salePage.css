@@ -1,0 +1,76 @@
+body{
+    text-align: center;
+    background-image: url(back.jpg);
+    background-size: cover;
+    font-weight: 100;
+}
+ #clockdiv{
+    color: pink;
+    /*border: 2px solid white;*/
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+}
+#clockdiv > div{
+    padding: 10px;
+    border-radius: 3px;
+    border: 2px solid white;
+    background: #E2D3CD;
+    display: inline-block;
+}
+#clockdiv div > span{       /*since div is parent of span*/
+    padding: 15px;
+    border-radius: 3px;
+    background: pink;
+    color: white;
+    display: inline-block;
+}
+.smalltext{
+    padding-top: 5px;
+    font-size: 16px;
+    color: white;
+}
+
+p{
+  color: white;
+  font-size: 72px; 
+  margin-top: 50px;
+  margin-bottom: 25px;
+  animation-name: sale;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+@keyframes sale {
+  0%   {color:#E2D3CD; }   /*from 0 - to 100 from begin to end */
+  25%  {color:pink; }
+  50%  {color:white; }
+  75%  {color:pink; }
+  100% {color:white; }
+}
+
+@keyframes register {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+button{
+	margin-top: 20px;
+	margin-left: 15px;
+	background-color: #E2D3CD;
+	border: 2px solid white;
+	padding: 17px;
+	color: pink;
+	font-size: 37px;
+    animation-name: register;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@media only screen and (max-width: 768px){
+	body{
+    text-align: center;
+    background: black;
+    font-weight: 60;
+}
+}

@@ -1,0 +1,56 @@
+{% extends 'recipes/main.html' %}
+{% block content %}
+
+<div style="padding-left: 1rem;">
+   <br>
+    <h3>{{recipe.name}}</h3>
+    <hr>
+  <div class="row g-0">
+    <div class="col-md-3" style="align: center;">
+      <img style="height: 25rem; width: 20rem;" src="{{ recipe.image.url }}">
+    </div>
+    <div class="col-md-9">
+      <div class="card-body">
+          <p class="card-text">Cooking time: {{recipe.cooking}}min.</p>
+          <p class="card-text">Yield: {{recipe.crop}}</p>
+          <p class="card-text">Instruction: {{recipe.instruction}}</p>
+          <p class="card-text">Rating: {{recipe.rating}}</p>
+          <p class="card-text">Calories: {{recipe.calories}}kkal.</p>
+          <p class="card-text">Total: {{recipe.total}}</p>
+          <p class="card-text">Level: {{recipe.level}}</p>
+          <p class="card-text">Category: {{recipe.category}}</p>
+      <br>
+      </div>
+    </div>
+  </div>
+{% if not reviews %}
+            <hr style="background-color:white">
+            {% if user.is_authenticated %}
+                  <h3>Feel free to write a review.</h3> <br>
+                  <h3><a href="{% url 'services' %}">Check our Services</a></h3>
+            {% endif %}
+    {% else %}
+            <span class="text-info">Overall Rating: </span><span class="badge badge-primary badge-pill">{{ book_rating }}</span>
+            <br>
+<hr>
+            <h3>Review Comments</h3>
+            <ul>
+            {% for review in reviews %}
+                  <li class="list-group-item">
+                        <span class="text-info">Review comment: </span> <span>{{ review.content }}</span>
+                        <br>
+                        <span class="text-info">Created on: </span><span>{{ review.date_created }}</span>
+                        <br>
+                        <span class="text-info">Modified on: </span><span>{{ review.date_edited }}</span>
+                        <br>
+                        <span class="text-info">Rating: </span><span class="badge badge-secondary badge-pill">{{ review.rating }}</span>
+                        <br>
+                        <span class="text-info">Creator: </span><span>{{ review.creator.username }}</span>
+                        <br>
+                        <a class="btn btn-primary" href="{% url 'review_edit' book.pk review.pk %}">Edit Review</a>
+                  </li>
+            {% endfor %}
+            </ul>
+      {% endif %}
+</div>
+{% endblock %}

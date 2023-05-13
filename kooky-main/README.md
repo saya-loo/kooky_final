@@ -1,0 +1,2 @@
+# kooky
+Django project

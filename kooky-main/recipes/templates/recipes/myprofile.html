@@ -1,0 +1,11 @@
+{% extends 'recipes/main.html' %}
+{% block content %}
+<br>
+<form action="" method="post" style="padding-left: 35rem; padding-top: 6rem; padding-bottom: 6rem;">
+  {% csrf_token %}
+  <form>
+  <a href="{% url 'logout' %}" type="button" class="btn btn-outline-dark my-2 my-sm-0">Log out</a>
+</form>
+</form>
+
+{% endblock %}

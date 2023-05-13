@@ -1,0 +1,18 @@
+        body {
+            background-color: #FFC0CB; /* pink */
+        }
+        h1 {
+            color: white;
+            font-size: 5rem;
+            text-align: center;
+            margin-top: 5rem;
+        }
+        .div{
+             display: inline-block;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .a{
+            text-decoration: none;
+        }
