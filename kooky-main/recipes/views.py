@@ -9,12 +9,20 @@ from recipes.utils import average_rating
 from .forms import BookMediaForm,EmpImageDisplay #поменяла ReviewForm SearchForm на эти два  
 
 
-def set_theme(request):
-    theme = request.GET.get('theme', 'light')
-    response = redirect('/')
+
+def home(request):
+    theme = request.COOKIES.get('theme', 'light')
+    context = {'theme': theme}
+    response = render(request, 'recipes/main.html', context)
     response.set_cookie('theme', theme)
     return response
 
+
+def set_theme(request):
+    theme = request.GET.get('theme', 'light')
+    response = HttpResponse()
+    response.set_cookie('theme', theme)
+    return response    
 
 def payment(request):
     return render(request, 'recipes/payment_success.html')    
@@ -23,16 +31,24 @@ def services(request):
     return render(request, "recipes/salePage.html")
 
 def index(request):
+
     return render(request, 'recipes/main.html')
 
 
 def recipes(request):
     recipes = Recipes.objects.all()
-    template = loader.get_template('recipes/recipes.html')
+
+    sort_by = request.GET.get('sort_by')  # get the value of the sorting parameter from the URL query string
+
+    if sort_by == 'difficulty':
+        recipes = sorted(recipes, key=lambda recipe: recipe.level)  # sort by difficulty level
+    else:
+        recipes = recipes.order_by('-rating')
+   
     context = {
         'recipes': recipes
     }
-    return HttpResponse(template.render(context, request))
+    return render(request,'recipes/recipes.html',{'recipes': recipes})
 
 
 def recipe_detail(request, pk):

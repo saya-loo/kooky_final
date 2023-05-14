@@ -11,10 +11,12 @@ nav {
 .navbar-brand > img {
     height: 50px;
 }*/
+
 body.dark {
   background-color: #333333;
   color: #ffffff;
 }
+
   .window {
     border: 2px solid #ccc;
     padding: 20px;
@@ -67,6 +69,10 @@ nav {
 .nav-links ul li:hover::after{
     width: 100%;
 }
+
+.logo{
+    padding: 0 ; 
+}
 body {
     font-family: 'Source Sans Pro', sans-serif;
     background-color: #e2d2dc
@@ -108,3 +114,5 @@ footer {
   justify-content: center;
   align-items: center;
 }
+
+

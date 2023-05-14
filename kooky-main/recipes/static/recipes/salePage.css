@@ -13,14 +13,14 @@ body{
 }
 #clockdiv > div{
     padding: 10px;
-    border-radius: 3px;
+    border-radius: 5px;
     border: 2px solid white;
     background: #E2D3CD;
     display: inline-block;
 }
 #clockdiv div > span{       /*since div is parent of span*/
     padding: 15px;
-    border-radius: 3px;
+    border-radius: 7px;
     background: pink;
     color: white;
     display: inline-block;
@@ -31,7 +31,7 @@ body{
     color: white;
 }
 
-p{
+p:not(#exc){
   color: white;
   font-size: 72px; 
   margin-top: 50px;
@@ -53,20 +53,32 @@ p{
   to { transform: rotate(360deg); }
 }
 
-button{
+button:not(#info){
 	margin-top: 20px;
 	margin-left: 15px;
 	background-color: #E2D3CD;
 	border: 2px solid white;
-	padding: 17px;
+    border-radius: 7px;
+	padding: 14px;
 	color: pink;
-	font-size: 37px;
+	font-size: 33px;
     animation-name: register;
     animation-duration: 3s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
+/*#info {
+    margin-top: 20px;
+    margin-left: 15px;
+    background-color: #E2D3CD;
+    border: 2px solid white;
+    border-radius: 7px;
+    padding: 10px;
+    color: pink;
+    font-size: 25px;
+
+}*/
 @media only screen and (max-width: 768px){
 	body{
     text-align: center;

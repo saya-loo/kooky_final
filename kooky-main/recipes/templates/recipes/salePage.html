@@ -17,7 +17,9 @@
 </head>
 
 <body>
-	<p style="color: white ;">SALE</p>
+
+	<p >SALE</p>
+    <p id="exc" style="color: pink; ">perconalized recipes, advice, tips from our experts<br> change your diet with us</p>
  <div id="clockdiv">
   <div>
     <span class="days" id="day"></span>
@@ -37,7 +39,9 @@
   </div>
 </div> <br>
 
-<button id="payment-button">Pay Now</button>
+<!--<button id="info">info about our product</button> <br>-->
+
+<button id="payment-button">Buy Now</button>
 <div id="payment-form" style="display: none;">
     <form  action="{% url 'payment' %}" method="post" >
        
